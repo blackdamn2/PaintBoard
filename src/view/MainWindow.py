@@ -447,7 +447,7 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "文件"))
         self.menu_2.setTitle(_translate("MainWindow", "编辑"))
         self.menu_3.setTitle(_translate("MainWindow", "图像"))
-        self.menu_3.setEnabled(False)
+        #self.menu_3.setEnabled(False)
         self.menu_4.setTitle(_translate("MainWindow", "旋转"))
         self.actionNew.setText(_translate("MainWindow", "新建"))
         self.actionOpenImg.setText(_translate("MainWindow", "打开图像"))
