@@ -17,16 +17,13 @@
   - 橡皮擦
 - 图片处理
   - 旋转、翻转
-  - 亮度、饱和度、对比度、色调调节
   - 灰度化
   - 二值化
-  - 反相（反色）
   - 浮雕
-  - 边缘检测
   - 模糊
   - 锐化
 
-## 详细代码
+## 主要参考
 
 [github仓库](https://github.com/BENULL/Paint)
 
@@ -114,83 +111,29 @@ def getCardinalPoints(haveSeen, centerPos,w,h):
 参考[Mac下使用opencv与pyqt发生冲突](https://blog.csdn.net/qq_43444349/article/details/106602543)
 
 ### pyqt QImage 与opencv MAT格式转化问题
-
-在使用opencv过程中需要传入QImage对象进行处理
-
-QImage转化成opencv下的 MAT(numpy ndarray) 对象
-
-```python
-def CvMatToQImage(cvMat):
-    if len(cvMat.shape) == 2:
-        rows, columns = cvMat.shape
-        bytesPerLine = columns
-        return QImage(cvMat.data, columns, rows, bytesPerLine, QImage.Format_Indexed8)
-    else:
-        rows, columns, channels = cvMat.shape
-        bytesPerLine = channels * columns
-        return QImage(cvMat.data, columns, rows, bytesPerLine, QImage.Format_RGBA8888)
+我们直接保存到一个temp文件中，让opencv直接读取就不会有该问题
 ```
 
 MAT(numpy ndarray) 转QImage
 
 ```python
-def QImageToCvMat(incomingImage):
-    incomingImage = incomingImage.convertToFormat(QImage.Format_RGBA8888)
-    width = incomingImage.width()
-    height = incomingImage.height()
-    ptr = incomingImage.bits()
-    ptr.setsize(height * width * 4)
-    arr = np.frombuffer(ptr, np.uint8).reshape((height, width, 4))
-    return arr
+def CvMatToQImage(data):
+    if data.dtype == np.uint8:
+        channels = 1 if len(data.shape) == 2 else data.shape[2]
+    if channels == 3:  # CV_8UC3
+        # Copy input Mat
+        # Create QImage with same dimensions as input Mat
+        img = QImage(data, data.shape[1], data.shape[0], data.strides[0], QImage.Format_RGB888)
+        return img.rgbSwapped()
+    elif channels == 1:
+        # Copy input Mat
+        # Create QImage with same dimensions as input Mat
+        img = QImage(data, data.shape[1], data.shape[0], data.strides[0], QImage.Format_Indexed8)
+        return img
 ```
 
-参考[Python 中如何将 Pyqt5 下的 QImage 对象转换成 PIL image 或 opencv MAT (numpy ndarray) 对象](https://blog.csdn.net/lch551218/article/details/104882183/)
+参考(https://blog.csdn.net/qq_26696715/article/details/122597667)
 
-## 效果预览
-
-### 绘画
-
-
-![](https://github.com/BENULL/Resource/raw/master/paint1.png)
-
-
-### 油漆桶效果
-
-![](https://github.com/BENULL/Resource/raw/master/paint2.png)
-
-### 图像处理部分展示
-
-### 原图
-
-![](https://github.com/BENULL/Resource/raw/master/paint3.png)
-
-### 亮度调节
-
-![](https://github.com/BENULL/Resource/raw/master/paint4.png)
-
-### 色调调节
-
-![](https://github.com/BENULL/Resource/raw/master/paint5.png)
-
-
-
-### 反相
-
-![](https://github.com/BENULL/Resource/raw/master/paint56png.png)
-
-
-
-### 灰度化
-
-![](https://github.com/BENULL/Resource/raw/master/paint8png.png)
-
-### 二值化
-
-![](https://github.com/BENULL/Resource/raw/master/paint9.png)
-
-### 边缘检测
-
-![](https://github.com/BENULL/Resource/raw/master/paint10.png)
 
 
 ## 部分参考
