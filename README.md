@@ -132,7 +132,7 @@ def CvMatToQImage(data):
 
 
 
-## 主要感谢
+## 主要感谢及参考
 
 [github仓库](https://github.com/BENULL/Paint)
 
