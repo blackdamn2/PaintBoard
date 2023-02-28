@@ -1,4 +1,6 @@
 # PyQt5 画图板
+<img width="1280" alt="78c7ff5b84229cab0da6cc2b906b90d" src="https://user-images.githubusercontent.com/126548606/221783350-b901b6a2-7664-435f-b35d-c94130af463f.png">
+
 
 ## 主要技术
 
