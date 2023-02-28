@@ -23,10 +23,6 @@
   - 模糊
   - 锐化
 
-## 主要参考
-
-[github仓库](https://github.com/BENULL/Paint)
-
 ## 实现过程遇到的问题
 
 ### 在pycharm上使用qtDesigner
@@ -136,6 +132,10 @@ def CvMatToQImage(data):
 
 
 
+## 主要感谢
+
+[github仓库](https://github.com/BENULL/Paint)
+
 ## 部分参考
 
 [https://www.cnblogs.com/lfri/p/10599420.html](https://www.cnblogs.com/lfri/p/10599420.html)
@@ -147,6 +147,6 @@ def CvMatToQImage(data):
 [https://blog.csdn.net/lzwarhang/article/details/93209166](https://blog.csdn.net/lzwarhang/article/details/93209166)
 
 ## 联系
-EMAIL ltobenull@163.com
+EMAIL 2313480389@qq.com
 
-QQ 327137362
+QQ 2313480389
